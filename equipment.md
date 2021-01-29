@@ -1,4 +1,4 @@
-# Jacob Arsenault N01244276:
+ Jacob Arsenault N01244276:
 
 -Raspberry Pi 3b+/4
 
