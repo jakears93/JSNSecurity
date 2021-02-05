@@ -1,4 +1,4 @@
- Jacob Arsenault N01244276:
+ Jacob Arsenault:
 
 -Raspberry Pi 3b+/4
 
@@ -12,7 +12,7 @@
 
 
 
-Satyam Dalvadi N01333116:
+Satyam Dalvadi:
 
 -SD Card
 
@@ -22,7 +22,7 @@ Satyam Dalvadi N01333116:
 
 
 
-Nick Phillip N01228613:
+Nick Phillip:
 
 -Raspberry Pi 4
 
