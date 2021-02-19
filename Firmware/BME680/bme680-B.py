@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-
+#code is based off of http://www.pibits.net/code/arduino-and-bme680-environmental-sensor-example.php 
 import bme680
 import time
 import sys
 import os
 import RPi.GPIO as GPIO
 from time import sleep
+
+import datetime
 
 print("""read-all.py - Displays temperature, pressure, humidity, and gas.
 Press Ctrl+C to exit!
@@ -90,29 +92,56 @@ sensor.select_gas_heater_profile(0)
 print('\n\nPolling:')
 try:
     while True:
+        x = datetime.datetime.now()
+
+	#trying to create the title of the file
+        #f = open("temp.txt", "a")
+        #print("This file displays the Temperture Pressure, Humidty, and Gas resistance in Ohms")
+        #f.close()
+
         if sensor.get_sensor_data():
+            print("")
+            print(x)
+           
+            print(x.strftime("%d-%m-%Y %H:%M:%S"))
+
+            f = open("temp.txt", "a") #out to file around here
+            
             output = '{0:.2f} C,{1:.2f} hPa,{2:.2f} %RH'.format(
                 sensor.data.temperature,
                 sensor.data.pressure,
                 sensor.data.humidity,)
+            					
+	#add timestamp/date to files aswell
 
             if sensor.data.heat_stable:
+               
                 print('{0},{1} Ohms'.format(
                 output,
                 sensor.data.gas_resistance))
+                #print('{0} Ohms'.format(sensor.data.gas_resistance))
+
+                 #writes date to file along with Data readings 
+                f.write("date: "+x.strftime("%d-%m-%Y,%H:%M:%S") + "\n")
+
+                f.write(output + "   " +'{0} Ohms'.format(sensor.data.gas_resistance) + "\n")
+                f.close() #closes file
 
                 if sensor.data.temperature>=30:
+                   #x = datetime.datetime.now()  
                    #test()
                    #blinkLED()
                    turnon()
 
                 if sensor.data.temperature<=29.9:
+                  #x = datetime.datetime.now() 
                    #test()
                    #blinkLED()
                    turnoff()
 
             else:
                 print(output)
+                
 
         time.sleep(1)
 
