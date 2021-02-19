@@ -15,7 +15,7 @@ import subprocess
 
 # Manage Keyboard Interupt and close program while clearing screen.
 def sigint_handler(signal, frame):
-    print 'Closing Program due to Interupt'
+    print('Closing Program due to Interupt')
     disp.clear()
     disp.display()
     sys.exit(0)
