@@ -1,0 +1,2 @@
+include ':JDSecuritySolutions'
+rootProject.name = "JDSecuritySolutions"
