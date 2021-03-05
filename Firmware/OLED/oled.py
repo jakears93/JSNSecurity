@@ -2,6 +2,7 @@ import os.path
 import signal
 import sys
 import time
+import pyrebase
 
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
@@ -12,10 +13,18 @@ from PIL import ImageFont
 
 import subprocess
 
+#Pyrebase Config to be moved to env var
+config = {
+        "apiKey": "19b17a41c94eeece3ba3a29a0095cf52f89392ed",
+        "authDomain": "https://JDSecurity.firebaseio.com",
+	"databaseURL": "https://jdsecuritysolutions-5726a.firebaseio.com/",
+	"storageBucket": "jdsecuritysolutions-5726a.appspot.com",
+}
+
 
 # Manage Keyboard Interupt and close program while clearing screen.
 def sigint_handler(signal, frame):
-    print 'Closing Program due to Interupt'
+    print('Closing Program due to Interupt')
     disp.clear()
     disp.display()
     sys.exit(0)
@@ -34,6 +43,14 @@ disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, 
 
 # Initialize library.
 disp.begin()
+
+# Initialize Pyrebase
+firebase = pyrebase.initialize_app(config)
+storage = firebase.storage()
+
+# Download temperature data
+storage.child("jacob/BedRoom/temp.txt").download("dataValues.txt")
+
 
 # Clear display.
 disp.clear()
@@ -63,7 +80,7 @@ font = ImageFont.load_default()
 while True:
 
     # File Containing Sensor Data
-    fileName = "textFile"
+    fileName = "dataValues.txt"
 
     # Open file reading in lines
     if not os.path.isfile(fileName):
@@ -79,9 +96,12 @@ while True:
     
     # 
     i = 0
+    c = 0
     for line in content:
-        draw.text((x, top+int(i)), str(line), font=font, fill=255)
-        i = i + 8
+        if c<5:
+            c+=1
+            draw.text((x, top+int(i)), str(line), font=font, fill=255)
+            i = i + 8
 
 
     # Display image.
