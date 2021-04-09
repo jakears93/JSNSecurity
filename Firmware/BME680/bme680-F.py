@@ -15,12 +15,12 @@ import pyrebase
 
 
 config = {}
-if not os.path.isfile("credentials"):
+if not os.path.isfile("../credentials"):
 	print("Credentials does not exist.")
 	sys.exit(0)
 
 else: 
-	conf_file = open("credentials")
+	conf_file = open("../credentials")
 
 for line in conf_file:
     key, value = line.split()

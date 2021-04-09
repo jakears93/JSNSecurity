@@ -1,1 +1,3 @@
-/Firmware/OLED/credentials
+/Firmware/credentials
+/Firmware/OLED/sensorReadings.txt
+/Firmware/BME680/sensorReadings.txt
