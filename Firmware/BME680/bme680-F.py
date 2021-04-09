@@ -156,7 +156,7 @@ try:
                 storage = firebase.storage()
                 fbupload = storage.child(storagepath).put("sensorReadings.txt")
 
-                storage.child("jacob/BedRoom/temp.txt").put("sensorReadings.txt")
+                storage.child("jacob/BedRoom").put("sensorReadings.txt")
 
                
                 if sensor.data.temperature>=30:
