@@ -9,13 +9,12 @@ import time
 import pyrebase
 import subprocess
 
-#Pyrebase Config to be moved to env var
-config = {
-        "apiKey": "",
-        "authDomain": "",
-	"databaseURL": "",
-	"storageBucket": "",
-}
+#Pyrebase Config from file
+config = {}
+conf_file = open("credentials")
+for line in conf_file:
+    key, value = line.split()
+    config[key] = value
 
 
 # Manage Keyboard Interupt and close program while clearing screen.
