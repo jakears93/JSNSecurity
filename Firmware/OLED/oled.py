@@ -9,13 +9,19 @@ import time
 import pyrebase
 import subprocess
 
-#Pyrebase Config from file
+#Import Pyrebase Config from file
 config = {}
-conf_file = open("credentials")
+if not os.path.isfile("../credentials"):
+    print("Credentials does not exist.")
+    sys.exit(0)
+else:
+    conf_file = open("../credentials")
+
 for line in conf_file:
     key, value = line.split()
     config[key] = value
 
+conf_file.close()
 
 # Manage Keyboard Interupt and close program while clearing screen.
 def sigint_handler(signal, frame):
