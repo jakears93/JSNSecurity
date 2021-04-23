@@ -1,6 +1,6 @@
 Project Name: JSN Security
 
-Group Members: Jacob Arsenault, Satyam Dalvadi and Nicholas Phillip, 
+Group Members: Jacob Arsenault, Satyam Dalvadi and Nicholas Phillip.
 
 Computer Engineering Technology project category: Customer Home monitoring
 
